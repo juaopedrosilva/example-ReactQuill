@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react' 
+import ReactQuill from 'react-quill' 
+import 'react-quill/dist/quill.snow.css' 
+import ReactHtmlParser from 'react-html-parser'
+import './App.css'
 
-class App extends Component {
+export default class App extends Component { 
+  state = { text: ''}
+  handleChange = (value)  => {
+    this.setState({ text: value })
+    
+  } 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <div className='container'>
+        <ReactQuill 
+          value={this.state.text} 
+          onChange={this.handleChange}  
+        />
+        <div class='text'>
+          { ReactHtmlParser(this.state.text)   }
+        </div>
+      </div>   
+    )
   }
 }
-
-export default App;
